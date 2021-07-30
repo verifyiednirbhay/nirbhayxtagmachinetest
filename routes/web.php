@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateUsers;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +20,11 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth'])->group(function(){
+    
     Route::get('/dashboard', function () {
+       if(Auth::user()->roles != '1'){
+           return redirect('userdashbord');
+       }
         return view('dashboard');
     })->name('dashboard');
 
