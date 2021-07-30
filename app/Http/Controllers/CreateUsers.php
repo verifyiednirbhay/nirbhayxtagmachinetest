@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
+use App\Exception\UndefinedVariableException;
 class CreateUsers extends Controller
 {
     /**
@@ -40,12 +41,24 @@ class CreateUsers extends Controller
             'role'=>'required'
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'roles'=>$request->role
-        ]);
+        try{
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'roles'=>$request->role
+            ]);
+        }catch(\Exception  $e){
+            return redirect()->route('create-users.index')
+            ->with('error','Error Occured');
+        }
+
+        if(!isset($user)){
+            
+            return redirect()->route('create-users.index')
+            ->with('error','Error Occured');
+        }
+      
 
         event(new Registered($user));
 
@@ -84,14 +97,20 @@ class CreateUsers extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role'=>'required'
         ]);
+        try{
 
-        $user->where('id',$id)->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>$request->password,
-            'roles'=>$request->role
-        ]);
-
+            $user->where('id',$id)->update([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'password'=>$request->password,
+                'roles'=>$request->role
+            ]);
+           
+        }catch(\Exception $e){
+           return redirect()->route('create-users.index')
+            ->with('error','Error Occured');
+        }
+       
         return redirect()->route('create-users.index')
             ->with('success','User updated successfully');
     }
