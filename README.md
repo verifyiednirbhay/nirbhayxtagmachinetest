@@ -7,5 +7,8 @@ Following tasks  covered:
 - Created resource for user create / Edit / Update .
 - Landing page costomization for both roles user & admin.
 
+## Database
+
+User mysql database file called machinetest.sql 
 
 
