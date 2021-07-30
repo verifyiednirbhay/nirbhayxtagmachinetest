@@ -1,7 +1,7 @@
 
 ## Machine test
 
-Following task has been covered:
+Following tasks  covered:
 
 - Create two type of role i.e User and Admin.
 - Created resource for user create / Edit / Update .
