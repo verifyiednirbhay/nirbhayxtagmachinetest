@@ -9,6 +9,6 @@ Following tasks  covered:
 
 ## Database
 
-User mysql database file called machinetest.sql 
+Use mysql database file  to create demo users called machinetest.sql 
 
 
