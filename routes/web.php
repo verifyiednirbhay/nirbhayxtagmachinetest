@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('userdashbord',function(){
         return view('userdashboard');
     })->name('userdashbord');
+
+    
     //Create  user resource.
     Route::resource('/create-users',CreateUsers::class);
   

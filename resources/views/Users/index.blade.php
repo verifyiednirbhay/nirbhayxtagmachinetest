@@ -30,7 +30,7 @@
                     <table class="table table-bordered" id="UsersTable">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Sr</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
@@ -38,9 +38,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($users as $key => $user)
                             <tr>
-                                <td>{{ $user->id }}</td>
+                                <td>{{$key +1}}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>@if($user->roles == '1') Admin @else User @endif</td>
